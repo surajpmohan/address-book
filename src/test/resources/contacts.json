@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "firstName": "Suraj",
+    "lastName": "Mohan",
+    "email": "abc@abc.com",
+    "phoneNumber": "443-345-2343",
+    "addressLine1": "1300 Harness Dir",
+    "addressLine2": "#123",
+    "zip": "53456",
+    "city": "San Jose",
+    "state": "CA",
+    "country": "USA",
+    "lastContactedDate": "07/23/2017"
+  },
+  {
+    "id": 2,
+    "firstName": "Suraj",
+    "lastName": "Mohan",
+    "email": "abc@abc.com",
+    "phoneNumber": "443-345-2343",
+    "addressLine1": "1300 Harness Dir",
+    "addressLine2": "#123",
+    "zip": "53456",
+    "city": "San Jose",
+    "state": "CA",
+    "country": "USA",
+    "lastContactedDate": "05/04/2017"
+  },
+  {
+    "id": 3,
+    "firstName": "Aron",
+    "lastName": "James",
+    "email": "aron@abc.com",
+    "phoneNumber": "324-345-2343",
+    "addressLine1": "1300 Mc Arthur Cir",
+    "addressLine2": "#50",
+    "zip": "23456",
+    "city": "Dallas",
+    "state": "TX",
+    "country": "USA",
+    "lastContactedDate": "07/04/2016"
+  }
+]
