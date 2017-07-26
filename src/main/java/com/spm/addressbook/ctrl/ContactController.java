@@ -25,8 +25,7 @@ public class ContactController {
 	
 	@RequestMapping(path="/contact", method=RequestMethod.POST)
 	public @ResponseBody Contact post(@RequestBody Contact contact){
-		contact = contactService.create(contact);
-		return contact;
+		return contactService.create(contact);
 	}
 	
 	@RequestMapping(path="/contact", method=RequestMethod.PUT)
@@ -41,8 +40,7 @@ public class ContactController {
 	
 	@RequestMapping(path="contact", method=RequestMethod.GET)
 	public @ResponseBody List<Contact> get(){
-		List<Contact> contacts = contactService.findAll();
-		return contacts;
+		return contactService.findAll();
 	}
 	
 	@RequestMapping(path="contact/filter", method=RequestMethod.GET)
@@ -66,12 +64,11 @@ public class ContactController {
 	
 	@RequestMapping(path="contact/{id}", method=RequestMethod.GET)
 	public @ResponseBody Contact getOne(@PathVariable("id") Long id){
-		Contact contact = contactService.findOne(id);
-		return contact;
+		return contactService.findOne(id);
 	}
 	
 	@RequestMapping(path="contact/{id}", method=RequestMethod.DELETE)
 	public void delete(@PathVariable Long id){
-		contactService.delete(id);;
+		contactService.delete(id);
 	}
 }

@@ -32,16 +32,14 @@ public class ContactService {
 		this.validate(contact);
 		ContactEntity contactEntity = new ContactEntity(contact);
 		contactEntity = contactRepository.save(contactEntity);
-		contact = new Contact(contactEntity);
-		return contact;
+		return new Contact(contactEntity);
 	}
 	
 	public Contact update(Contact contact){
 		this.validateForUpdate(contact);
 		ContactEntity contactEntity = new ContactEntity(contact);
 		contactEntity = contactRepository.save(contactEntity);
-		contact = new Contact(contactEntity);
-		return contact;
+		return new Contact(contactEntity);
 	}
 	
 	public Contact patch(Contact contact){
@@ -50,8 +48,7 @@ public class ContactService {
 		ContactEntity existingEntity = contactRepository.findOne(contact.getId());
 		mergePatch(newEntity, existingEntity);
 		newEntity = contactRepository.save(existingEntity);
-		contact = new Contact(newEntity);
-		return contact;
+		return new Contact(newEntity);
 	}
 	
 	public Contact findOne(Long id) {
@@ -65,19 +62,14 @@ public class ContactService {
 	
 	public List<Contact> findAll() {
 		Iterable<ContactEntity> contactEntities = contactRepository.findAll();
-		List<Contact> contacts = StreamSupport.stream(contactEntities.spliterator(), false)
-				.map(entity -> new Contact(entity)).collect(Collectors.toList()); 
-		return contacts;
+		return StreamSupport.stream(contactEntities.spliterator(), false)
+				.map(Contact::new).collect(Collectors.toList()); 
 	}
 	
 	public List<Contact> findByState(List<String> states) {
 		Iterable<ContactEntity> contactEntities = contactRepository.findByStates(states);
-		List<Contact> contacts = new ArrayList<>();
-		if (contactEntities != null) {
-			contacts = StreamSupport.stream(contactEntities.spliterator(), false)
-				.map(entity -> new Contact(entity)).collect(Collectors.toList()); 
-		}
-		return contacts;
+		return StreamSupport.stream(contactEntities.spliterator(), false)
+				.map(Contact::new).collect(Collectors.toList()); 
 	}
 	
 
@@ -92,9 +84,8 @@ public class ContactService {
 			throw new ContactServiceException(e.getMessage());
 		}
 		Iterable<ContactEntity> contactEntities = contactRepository.findByRange(startDate, endDate);
-		List<Contact> contacts = StreamSupport.stream(contactEntities.spliterator(), false)
-				.map(entity -> new Contact(entity)).collect(Collectors.toList()); 
-		return contacts;
+		return StreamSupport.stream(contactEntities.spliterator(), false)
+				.map(Contact::new).collect(Collectors.toList()); 
 	}
 	
 	public List<Contact> findByAreaCode(String areaCode) {
@@ -102,9 +93,8 @@ public class ContactService {
 			throw new ContactServiceException("Area code should contain exactly three digits.");
 		}
 		Iterable<ContactEntity> contactEntities = contactRepository.findByAreaCode(areaCode);
-		List<Contact> contacts = StreamSupport.stream(contactEntities.spliterator(), false)
-				.map(entity -> new Contact(entity)).collect(Collectors.toList()); 
-		return contacts;
+		return StreamSupport.stream(contactEntities.spliterator(), false)
+				.map(Contact::new).collect(Collectors.toList()); 
 	}
 	
 	public void delete(Long id) {
