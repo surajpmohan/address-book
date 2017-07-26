@@ -152,6 +152,13 @@ public class ContactServiceTest {
 		List<Contact> txContacts = service.findByAreaCode(areaCode);
 		assertEquals(2, txContacts.size());
 		txContacts.forEach(item -> contacts.contains(item));
+		
+		try {
+			service.findByAreaCode("2");
+		} catch(Exception ex) {
+			assertEquals("Area code should contain exactly three digits.", ex.getMessage());
+		}
+		
 	}
 
 	@Test

@@ -98,6 +98,9 @@ public class ContactService {
 	}
 	
 	public List<Contact> findByAreaCode(String areaCode) {
+		if (areaCode.length() != 3) {
+			throw new ContactServiceException("Area code should contain exactly three digits.");
+		}
 		Iterable<ContactEntity> contactEntities = contactRepository.findByAreaCode(areaCode);
 		List<Contact> contacts = StreamSupport.stream(contactEntities.spliterator(), false)
 				.map(entity -> new Contact(entity)).collect(Collectors.toList()); 
