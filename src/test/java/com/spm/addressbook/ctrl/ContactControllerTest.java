@@ -6,15 +6,19 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.text.Document;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -30,6 +34,7 @@ import com.spm.addressbook.bo.ContactService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ContactController.class)
+@AutoConfigureRestDocs(outputDir = "target")
 public class ContactControllerTest {
 	
 	@Autowired
@@ -55,7 +60,7 @@ public class ContactControllerTest {
 		given(service.create(contacts.get(1))).willReturn(contacts.get(1));
 		MvcResult result = mvc.perform(post("/contact")
 			    .contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(contacts.get(1))))
-		 		.andExpect(status().isOk()).andReturn();
+		 		.andExpect(status().isOk()).andDo(document("rest/post") ).andReturn();
 		Contact contact = mapper.readValue(result.getResponse().getContentAsString(), Contact.class);
 		assertEquals(contacts.get(1), contact);
 	}
@@ -65,7 +70,7 @@ public class ContactControllerTest {
 		given(service.update(contacts.get(1))).willReturn(contacts.get(1));
 		MvcResult result = mvc.perform(put("/contact")
 			    .contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(contacts.get(1))))
-		 		.andExpect(status().isOk()).andReturn();
+		 		.andExpect(status().isOk()).andDo(document("rest/put") ).andReturn();
 		Contact contact = mapper.readValue(result.getResponse().getContentAsString(), Contact.class);
 		assertEquals(contacts.get(1), contact);
 	}
@@ -79,7 +84,7 @@ public class ContactControllerTest {
 		given(service.patch(patch)).willReturn(contacts.get(1));
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.patch("/contact")
 			    .contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(patch)))
-		 		.andExpect(status().isOk()).andReturn();
+		 		.andExpect(status().isOk()).andDo(document("rest/patch") ).andReturn();
 		Contact contact = mapper.readValue(result.getResponse().getContentAsString(), Contact.class);
 		assertEquals(contacts.get(1), contact);
 		assertEquals("updated name", contact.getFirstName());
@@ -90,7 +95,7 @@ public class ContactControllerTest {
 		given(service.findAll()).willReturn(contacts);
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/contact")
 			    .contentType(MediaType.APPLICATION_JSON))
-		 		.andExpect(status().isOk()).andReturn();
+		 		.andExpect(status().isOk()).andDo(document("rest/getall") ).andReturn();
 		List<Contact> actualContacts = mapper.readValue(result.getResponse().getContentAsString(), 
 				new TypeReference<List<Contact>>() {});
 		assertEquals(contacts, actualContacts);
@@ -106,7 +111,7 @@ public class ContactControllerTest {
 		given(service.findByState(states)).willReturn(filtered);
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/contact/filter?states=TX")
 			    .contentType(MediaType.APPLICATION_JSON))
-		 		.andExpect(status().isOk()).andReturn();
+		 		.andExpect(status().isOk()).andDo(document("rest/getbystates") ).andReturn();
 		List<Contact> actualResults = mapper.readValue(result.getResponse().getContentAsString(), 
 				new TypeReference<List<Contact>>() {});
 		assertEquals(filtered, actualResults);
@@ -117,7 +122,7 @@ public class ContactControllerTest {
 		given(service.findByDateRange("04/04/2017", "06/04/2017")).willReturn(filtered);
 		result = mvc.perform(MockMvcRequestBuilders.get("/contact/filter?startDate=04/04/2017&endDate=06/04/2017")
 			    .contentType(MediaType.APPLICATION_JSON))
-		 		.andExpect(status().isOk()).andReturn();
+		 		.andExpect(status().isOk()).andDo(document("rest/getbyrange") ).andReturn();
 		actualResults = mapper.readValue(result.getResponse().getContentAsString(), 
 				new TypeReference<List<Contact>>() {});
 		assertEquals(filtered, actualResults);
@@ -130,7 +135,7 @@ public class ContactControllerTest {
 		given(service.findByAreaCode(areaCode)).willReturn(filtered);
 		result = mvc.perform(MockMvcRequestBuilders.get("/contact/filter?areaCode="+areaCode)
 			    .contentType(MediaType.APPLICATION_JSON))
-		 		.andExpect(status().isOk()).andReturn();
+		 		.andExpect(status().isOk()).andDo(document("rest/getbyareacode") ).andReturn();
 		actualResults = mapper.readValue(result.getResponse().getContentAsString(), 
 				new TypeReference<List<Contact>>() {});
 		assertEquals(filtered, actualResults);
@@ -149,7 +154,7 @@ public class ContactControllerTest {
 		given(service.findOne(contact.getId())).willReturn(contact);
 		MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/contact/"+contact.getId())
 			    .contentType(MediaType.APPLICATION_JSON))
-		 		.andExpect(status().isOk()).andReturn();
+		 		.andExpect(status().isOk()).andDo(document("rest/getone") ).andReturn();
 		Contact contactItem = mapper.readValue(result.getResponse().getContentAsString(), Contact.class);
 		assertEquals(contact, contactItem);
 
@@ -160,7 +165,7 @@ public class ContactControllerTest {
 		Contact contact = contacts.get(1);
 		mvc.perform(MockMvcRequestBuilders.delete("/contact/"+contact.getId())
 			    .contentType(MediaType.APPLICATION_JSON))
-		 		.andExpect(status().isOk());
+		 		.andExpect(status().isOk()).andDo(document("rest/delete") );
 		verify(service).delete(contact.getId());
 	}
 

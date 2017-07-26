@@ -1,0 +1,105 @@
+= REST doc for the address book service.
+
+== Create contact.
+
+.Request
+include::{snippets}/rest/post/http-request.adoc[]
+
+.Response
+include::{snippets}/rest/post/http-response.adoc[]
+
+.Curl Request
+include::{snippets}/rest/post/curl-request.adoc[]
+
+== Update contact.
+Id is mandatory for update. +
+It will replace the existing contact with new contact.
+
+.Request
+include::{snippets}/rest/put/http-request.adoc[]
+
+.Response
+include::{snippets}/rest/put/http-response.adoc[]
+
+.Curl Request
+include::{snippets}/rest/put/curl-request.adoc[]
+
+== Patch contact.
+Id is mandatory for patch. +
+It will patch the non-null fields from the input contact to the existing contact.
+
+.Request
+include::{snippets}/rest/patch/http-request.adoc[]
+
+.Response
+include::{snippets}/rest/patch/http-response.adoc[]
+
+.Curl Request
+include::{snippets}/rest/patch/curl-request.adoc[]
+
+== Get all contacts.
+
+.Request
+include::{snippets}/rest/getall/http-request.adoc[]
+
+.Response
+include::{snippets}/rest/getall/http-response.adoc[]
+
+.Curl Request
+include::{snippets}/rest/getall/curl-request.adoc[]
+
+== Get contact by id.
+
+.Request
+include::{snippets}/rest/getone/http-request.adoc[]
+
+.Response
+include::{snippets}/rest/getone/http-response.adoc[]
+
+.Curl Request
+include::{snippets}/rest/getone/curl-request.adoc[]
+
+== Get contacts by area code.
+
+.Request
+include::{snippets}/rest/getbyareacode/http-request.adoc[]
+
+.Response
+include::{snippets}/rest/getbyareacode/http-response.adoc[]
+
+.Curl Request
+include::{snippets}/rest/getbyareacode/curl-request.adoc[]
+
+== Get contacts by last contacted date range.
+
+.Request
+include::{snippets}/rest/getbyrange/http-request.adoc[]
+
+.Response
+include::{snippets}/rest/getbyrange/http-response.adoc[]
+
+.Curl Request
+include::{snippets}/rest/getbyrange/curl-request.adoc[]
+
+== Get contacts by states.
+
+.Request
+include::{snippets}/rest/getbystates/http-request.adoc[]
+
+.Response
+include::{snippets}/rest/getbystates/http-response.adoc[]
+
+.Curl Request
+include::{snippets}/rest/getbystates/curl-request.adoc[]
+
+== Delete the contact by id.
+
+.Request
+include::{snippets}/rest/delete/http-request.adoc[]
+
+.Response
+include::{snippets}/rest/delete/http-response.adoc[]
+
+.Curl Request
+include::{snippets}/rest/delete/curl-request.adoc[]
+
