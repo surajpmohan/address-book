@@ -1,0 +1,157 @@
+{
+	"variables": [],
+	"info": {
+		"name": "address-book",
+		"_postman_id": "1ca7d158-5a9a-edf7-ee71-2f3b93caff05",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAll",
+			"request": {
+				"url": "http://localhost:8080/contact",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "post",
+			"request": {
+				"url": "http://localhost:8080/contact",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"firstName\": \"Aron\",\n  \"lastName\": \"James\",\n  \"email\": \"abc@abc.com\",\n  \"phoneNumber\": \"443-345-2343\",\n  \"addressLine1\": \"1300 Harness Dir\",\n  \"addressLine2\": \"#123\",\n  \"zip\": \"53456\",\n  \"city\": \"San Jose\",\n  \"state\": \"CA\",\n  \"country\": \"USA\",\n  \"lastContactedDate\": \"07/26/2017\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "put",
+			"request": {
+				"url": "http://localhost:8080/contact",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\" : \"Anil\",\n\t\"lastName\" : \"John\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getOne",
+			"request": {
+				"url": "http://localhost:8080/contact/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"url": "http://localhost:8080/contact/3",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getByStates",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/contact/filter?states=CA,TX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contact",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "states",
+							"value": "CA,TX",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getByAreaCode",
+			"request": {
+				"url": "http://localhost:8080/contact",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getByLastContactedDate",
+			"request": {
+				"url": "http://localhost:8080/contact",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "patch",
+			"request": {
+				"url": "http://localhost:8080/contact",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\" : \"Anil\",\n\t\"lastName\" : \"John\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
