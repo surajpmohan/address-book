@@ -14,7 +14,9 @@ The postman collection with end points and sample data is present in the file ad
 
 To import the project on eclipse/STS.
 
-1. Import as a general project.
+1. Import General -> Project from folder or archive.
 
-2. Right click on the project, Configure -> Convert to maven project.
+2. Select address-book
+
+3. Right click on the project, Configure -> Convert to maven project (if not configured automatically.).
 
