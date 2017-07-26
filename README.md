@@ -1,7 +1,11 @@
 # address-book
 
-git clone https://github.com/surajpmohan/address-book.git --
-cd address-book --
+git clone https://github.com/surajpmohan/address-book.git
+
+
+cd address-book
+
+
 mvn clean package +
 mvn spring-boot:run +
 
